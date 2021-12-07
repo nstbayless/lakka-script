@@ -2,10 +2,6 @@
 #
 #   curl https://raw.githubusercontent.com/nstbayless/lakka-script/main/bayless-cdi-bootstrap.sh | /bin/bash
 #
-# or:
-#
-#   curl https://tinyurl.com/yckka566 | /bin/bash
-#
 # this script bootstraps a Bayless CD-i
 # it must be run on a Lakka device, from any directory.
 
