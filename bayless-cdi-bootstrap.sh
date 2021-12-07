@@ -26,7 +26,7 @@ assert_has_command bash
 assert_has_command openssl
 
 set -e
-SETUP_DIRECTORY=`mktemp`
+SETUP_DIRECTORY=`mktemp -d`
 cd $SETUP_DIRECTORY
 echo "using '$SETUP_DIRECTORY' as temporary workspace"
 
