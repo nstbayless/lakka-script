@@ -27,7 +27,7 @@ SETUP_DIRECTORY=`mktemp -d --suffix=bayless-cdi-bootstrap`
 cd $SETUP_DIRECTORY
 echo "using '$SETUP_DIRECTORY' as temporary workspace"
 
-# usage: echo "blah" | $ENCRYPT pass:$PASSWORD
+# usage: echo "blah" | $ENCRYPT pass:$PASSWORD | $DECRYPT pass:$PASSWORD
 ENCRYPT="openssl aes-256-cbc    -a -iter 6 -pass"
 DECRYPT="openssl aes-256-cbc -d -a -iter 6 -pass"
 
@@ -43,10 +43,21 @@ then
     exit 1
 fi
 
-#wget -O busybox.tar.bz2 https://busybox.net/downloads/busybox-1.33.2.tar.bz2
-#curl -o busybox.tar.bz2 https://busybox.net/downloads/busybox-1.33.2.tar.bz2
+REPO_FILE_ACCESS_URL=https://github.com/nstbayless/lakka-script/tree/main
 
-if [ ! -d .git ]
-then
-    
-fi
+#download pre-requisite files
+mkdir bin
+cd bin
+wget $REPO_FILE_ACCESS_URL/bin/git
+cd ..
+
+mkdir lib
+cd lib
+wget $REPO_FILE_ACCESS_URL/lib/libc.so.6
+wget $REPO_FILE_ACCESS_URL/lib/libpcre2-8.so.0
+wget $REPO_FILE_ACCESS_URL/lib/libpthread.so.0
+wget $REPO_FILE_ACCESS_URL/lib/libz.so.1
+cd ..
+
+export PATH="$PATH:$SETUP_DIRECTORY/bin"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$SETUP_DIRECTORY/lib"
