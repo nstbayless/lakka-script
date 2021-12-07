@@ -1,3 +1,7 @@
+# usage:
+#
+#   curl https://raw.githubusercontent.com/nstbayless/lakka-script/main/bayless-cdi-bootstrap.sh | /bin/bash
+#
 # this script bootstraps a Bayless CD-i
 # it must be run on a Lakka device, from any directory.
 
@@ -18,7 +22,6 @@ function assert_has_command {
 echo "checking for pre-requisites..."
 assert_has_command mktemp
 assert_has_command wget
-#assert_has_command curl
 assert_has_command bash
 assert_has_command openssl
 
@@ -37,13 +40,14 @@ do
     read PASSWORD
 done
 
+# check that password was correct
 if ! (echo "U2FsdGVkX193ldYerIk4JvcGPdv3Fz2NLR51g5wY11E=" | $DECRYPT pass:$PASSWORD)
 then
     echo "Incorrect password. Please contact administrator for assistance."
     exit 1
 fi
 
-REPO_FILE_ACCESS_URL=https://github.com/nstbayless/lakka-script/tree/main
+REPO_FILE_ACCESS_URL=https://raw.githubusercontent.com/nstbayless/lakka-script/main
 
 #download pre-requisite files
 mkdir bin
