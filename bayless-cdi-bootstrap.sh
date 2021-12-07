@@ -1,11 +1,17 @@
 # this script bootstraps a Bayless CD-i
 # it must be run on a Lakka device, from any directory.
 
+if [ ! -d /storage ] || [ ! -f /usr/bin/retroarch ]
+then
+    echo "ERROR: this script must be run on a Lakka device."
+    exit 1
+fi
+
 function assert_has_command {
     if ! command -v "$1" > /dev/null
     then
         echo "ERROR: command '$1' not found. Aborting."
-        exit 1
+        exit 2
     fi
 }
 
