@@ -1,6 +1,6 @@
 # usage:
 #
-#   curl https://raw.githubusercontent.com/nstbayless/lakka-script/main/bayless-cdi-bootstrap.sh | /bin/bash
+#   bash <(curl -s https://raw.githubusercontent.com/nstbayless/lakka-script/main/bayless-cdi-bootstrap.sh)
 #
 # this script bootstraps a Bayless CD-i
 # it must be run on a Lakka device, from any directory.
