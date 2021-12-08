@@ -64,14 +64,13 @@ REPO_FILE_ACCESS_URL=https://raw.githubusercontent.com/nstbayless/lakka-script/m
 mkdir bin
 cd bin
 wget $REPO_FILE_ACCESS_URL/bin/git
+chmod a+x git
 cd ..
 
 # download pre-requisite libs
 mkdir lib
 cd lib
-wget $REPO_FILE_ACCESS_URL/lib/libc.so.6
 wget $REPO_FILE_ACCESS_URL/lib/libpcre2-8.so.0
-wget $REPO_FILE_ACCESS_URL/lib/libpthread.so.0
 wget $REPO_FILE_ACCESS_URL/lib/libz.so.1
 cd ..
 
@@ -161,6 +160,9 @@ echo "$ENCRYPTED_PUB_KEY" | $DECRYPT pass:$PASSWORD > .ssh/id_bayless_cdi_rsa.pu
 echo "$ENCRYPTED_PRIV_KEY" | $DECRYPT pass:$PASSWORD > .ssh/id_bayless_cdi_rsa
 
 echo "added private keys."
+
+# disable strict host checking. Allows git clone to succeed without user input.
+echo "StrictHostKeyChecking no" > .ssh/config
 
 if [ -d .git ]
 then
