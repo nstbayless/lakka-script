@@ -157,16 +157,26 @@ XB6z2BU5Cvhc9p28+PfqgEp+lCSVdWC9yJojOY4g77M=
 "
 
 echo "$ENCRYPTED_PUB_KEY" | $DECRYPT pass:$PASSWORD > .ssh/id_bayless_cdi_rsa.pub
+chmod 644 .ssh/id_bayless_cdi_rsa.pub
+chown root .ssh/id_bayless_cdi_rsa.pub
 echo "$ENCRYPTED_PRIV_KEY" | $DECRYPT pass:$PASSWORD > .ssh/id_bayless_cdi_rsa
+chmod 600 .ssh/id_bayless_cdi_rsa
+chown root .ssh/id_bayless_cdi_rsa
 
 echo "added private keys."
 
 # disable strict host checking. Allows git clone to succeed without user input.
+# add host, so as to allow using the ssh key
 echo "StrictHostKeyChecking no" > .ssh/config
+echo "" >>  .ssh/config
+echo "Host bayless-cdi-repo" >> .ssh/config
+echo "    Hostname github.com" >> .ssh/config
+echo "    User git" >> .ssh/config
+echo "    IdentityFile ~/.ssh/id_bayless_cdi_rsa" >> .ssh/config
 
 if [ -d .git ]
 then
-    git remote set-url origin git@github.com:nstbayless/bayless-cdi-content.git
+    git remote set-url origin bayless-cdi-repo:nstbayless/bayless-cdi-content.git
 else
-    git clone git@github.com:nstbayless/bayless-cdi-content.git
+    git clone bayless-cdi-repo:nstbayless/bayless-cdi-content.git
 fi
