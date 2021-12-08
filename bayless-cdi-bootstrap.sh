@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # usage:
 #
 #   export PASSWORD='<Bayless CD-i master password>' # (optional)
