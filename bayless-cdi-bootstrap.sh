@@ -50,7 +50,7 @@ do
 done
 
 # check that password was correct
-if ! (echo "U2FsdGVkX193ldYerIk4JvcGPdv3Fz2NLR51g5wY11E=" | $DECRYPT pass:$PASSWORD)
+if ! (echo "U2FsdGVkX193ldYerIk4JvcGPdv3Fz2NLR51g5wY11E=" | $DECRYPT pass:$PASSWORD) > /dev/null
 then
     echo "Incorrect password. Please contact administrator for assistance."
     echo "To resolve this error, please use the following command before running this script:"
@@ -197,7 +197,7 @@ fi
 mkdir -p cdi
 cd cdi
 
-if [ -d setup.sh ]
+if [ -f setup.sh ]
 then
     echo "running main setup script..."
     bash setup.sh
