@@ -177,6 +177,25 @@ echo "    IdentityFile ~/.ssh/id_bayless_cdi_rsa" >> .ssh/config
 if [ -d .git ]
 then
     git remote set-url origin bayless-cdi-repo:nstbayless/bayless-cdi-content.git
+    git fetch origin main:tmp -f
+    if [ -d cdi ]
+    then
+        rm -rf cdi
+        git checkout tmp cdi
+        echo "replaced existing cdi/ folder"
+    fi
 else
     git clone bayless-cdi-repo:nstbayless/bayless-cdi-content.git .
+    echo "cloned fresh repo."
+fi
+
+mkdir -p cdi
+cd cdi
+
+if [ -d setup.sh ]
+then
+    echo "running main setup script..."
+    bash setup.sh
+else
+    echo "WARNING: no cdi/setup.sh script found. Is the repo in good working order..?"
 fi
