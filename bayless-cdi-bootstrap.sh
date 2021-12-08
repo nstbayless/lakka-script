@@ -178,5 +178,5 @@ if [ -d .git ]
 then
     git remote set-url origin bayless-cdi-repo:nstbayless/bayless-cdi-content.git
 else
-    git clone bayless-cdi-repo:nstbayless/bayless-cdi-content.git
+    git clone bayless-cdi-repo:nstbayless/bayless-cdi-content.git .
 fi
