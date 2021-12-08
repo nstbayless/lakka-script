@@ -185,7 +185,10 @@ then
         echo "replaced existing cdi/ folder"
     fi
 else
-    git clone bayless-cdi-repo:nstbayless/bayless-cdi-content.git .
+    git init
+    git remote add origin bayless-cdi-repo:nstbayless/bayless-cdi-content.git
+    git fetch origin main:tmp
+    git checkout tmp cdi
     echo "cloned fresh repo."
 fi
 
